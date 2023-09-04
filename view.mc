@@ -135,15 +135,15 @@ var stepgoal = 0;
          }
        cat.draw(dc);
          dc.setColor(0x000000, Graphics.COLOR_TRANSPARENT);
-       dc.drawText(centerX*0.6, centerY*0.35,LargeFont, hours.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
-       dc.drawText(centerX*0.63, centerY*0.63,LargeFont, clockTime.min.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
-dc.drawText( centerX*1.5, centerY*0.4, wordFont,  ("!"+userCAL), Graphics.TEXT_JUSTIFY_LEFT );
-dc.drawText( centerX*1.72, centerY*0.55, wordFont,  ("^"+userHEART), Graphics.TEXT_JUSTIFY_LEFT );
-dc.drawText( centerX*1.8, centerY*0.7, wordFont,  ("*"+userBattery), Graphics.TEXT_JUSTIFY_LEFT );
-dc.drawText( centerX*1.82, centerY*0.86, wordFont,  ("_"+userNotify), Graphics.TEXT_JUSTIFY_LEFT );
-dc.drawText( centerX*1.8, centerY*1, wordFont,  (">"+userAlarm), Graphics.TEXT_JUSTIFY_LEFT );
-  dc.drawText(centerX*1.8, centerY*1.17, wordFont, " "+TEMP+" "+FC, Graphics.TEXT_JUSTIFY_RIGHT );
-  dc.drawText(centerX, centerY*1.8, wordFont, ("$"+userSTEPS), Graphics.TEXT_JUSTIFY_CENTER );
+       dc.drawText(centerX*0.6, centerY*0.40,LargeFont, hours.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
+       dc.drawText(centerX*0.65, centerY*0.68,LargeFont, clockTime.min.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
+dc.drawText( centerX*1.5, centerY*0.3, wordFont,  ("!"+userCAL), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.82, centerY*0.45, wordFont,  ("^"+userHEART), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.92, centerY*0.6, wordFont,  ("*"+userBattery), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*2, centerY*0.79, wordFont,  ("_"+userNotify), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.97, centerY*0.95, wordFont,  (">"+userAlarm), Graphics.TEXT_JUSTIFY_RIGHT );
+  dc.drawText(centerX*1.85, centerY*1.1, wordFont, " "+TEMP+" "+FC, Graphics.TEXT_JUSTIFY_RIGHT );
+  dc.drawText(centerX*0.93, centerY*1.8, wordFont, ("$"+userSTEPS), Graphics.TEXT_JUSTIFY_CENTER );
    
 /*
 calories exclaim
