@@ -1,0 +1,31 @@
+<drawables>
+<bitmap id="LauncherIcon" filename="launcher_icon.png" />
+
+<bitmap id="grow218" filename="grow218.png"  dithering="none"/>
+<bitmap id="grow260" filename="grow260.png"   dithering="none"/>
+<bitmap id="grow360" filename="grow360.png"   dithering="none"/>
+<bitmap id="grow390" filename="grow390.png"   dithering="none"/>
+<bitmap id="grow416" filename="grow416.png"  dithering="none" />
+<bitmap id="grow454" filename="grow454.png"  dithering="none" />
+
+<bitmap id="grow2181" filename="grow2181.png"   dithering="none"/>
+<bitmap id="grow2601" filename="grow2601.png"  dithering="none" />
+<bitmap id="grow3601" filename="grow3601.png"  dithering="none" />
+<bitmap id="grow3901" filename="grow3901.png"  dithering="none" />
+<bitmap id="grow4161" filename="grow4161.png"  dithering="none" />
+<bitmap id="grow4541" filename="grow4541.png"  dithering="none" />
+
+<bitmap id="grow2182" filename="grow2182.png"  dithering="none" />
+<bitmap id="grow2602" filename="grow2602.png"  dithering="none" />
+<bitmap id="grow3602" filename="grow3602.png"  dithering="none" />
+<bitmap id="grow3902" filename="grow3902.png"  dithering="none" />
+<bitmap id="grow4162" filename="grow4162.png"  dithering="none" />
+<bitmap id="grow4542" filename="grow4542.png"  dithering="none" />
+
+<bitmap id="MED1" filename="med1.png"  dithering="none" />
+<bitmap id="MED2" filename="med2.png"  dithering="none" />
+<bitmap id="SMALL1" filename="small1.png"  dithering="none" />
+<bitmap id="SMALL2" filename="small2.png"  dithering="none" />
+<bitmap id="BIG1" filename="big1.png"  dithering="none" />
+<bitmap id="BIG2" filename="big1.png"  dithering="none" />
+</drawables>
