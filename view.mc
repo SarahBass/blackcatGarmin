@@ -47,7 +47,7 @@ class VirtualPetNothingView extends WatchUi.WatchFace {
  var userBattery = "-";
    if (myStats.battery != null){userBattery = Lang.format("$1$",[((myStats.battery.toNumber())).format("%2d")]);}else{userBattery="-";} 
 
-   var userSTEPS = 3400;
+   var userSTEPS = 0;
    //if (info.steps != null){userSTEPS = info.steps.toNumber();}else{userSTEPS=0;} 
 
   var userNotify = "-";
@@ -92,7 +92,18 @@ else{userHEART = getHeartRate().toString();}
    
 
        dog.draw(dc);
+if (System.getDeviceSettings().screenHeight == 390){
+dc.setColor(0xFFFFFF, Graphics.COLOR_TRANSPARENT);
+       dc.fillEllipse(centerX*1.1, centerY*0.5, centerX*0.23, centerY*0.08);
+         dc.setColor(rainbow[today.min%18], Graphics.COLOR_TRANSPARENT);
+         if (today.min%2 == 1){
+         dc.fillEllipse(centerX*(0.94 + (today.sec%18)*0.01), centerY*0.5, centerX*0.04, centerY*0.08);
+         dc.fillEllipse(centerX*(1.18 + (today.sec%18)*0.01), centerY*0.5, centerX*0.04, centerY*0.08);
+         }else {
+          dc.fillEllipse(centerX*(1.10 - (today.sec%18)*0.01), centerY*0.5, centerX*0.04, centerY*0.08);
+         dc.fillEllipse(centerX*(1.34 - (today.sec%18)*0.01), centerY*0.5, centerX*0.04, centerY*0.08);}
 
+}else{
          dc.setColor(0xFFFFFF, Graphics.COLOR_TRANSPARENT);
        dc.fillEllipse(centerX*1.1, centerY*0.5, centerX*0.23, centerY*0.08);
          dc.setColor(rainbow[today.min%18], Graphics.COLOR_TRANSPARENT);
@@ -102,7 +113,7 @@ else{userHEART = getHeartRate().toString();}
          }else {
           dc.fillEllipse(centerX*(1.05 - (today.sec%12)*0.01), centerY*0.5, centerX*0.04, centerY*0.08);
          dc.fillEllipse(centerX*(1.25 - (today.sec%12)*0.01), centerY*0.5, centerX*0.04, centerY*0.08);
-         }
+         }}
        
        
        cat.draw(dc);
@@ -332,11 +343,11 @@ var size = 0;
         growX=0.87;
         //speed = 0.6;
         growY=0.81;
-      }else if (mySettingsHeight > 360 && System.getDeviceSettings().screenHeight < 415){
+      }else if (mySettingsHeight ==390){
         size=2;
-        growX=0.7;
+        growX=0.76;
         //speed = 1.25;
-        growY=0.1;
+        growY=0.52;
       }else if (mySettingsHeight == 416){
         size=2;
         growX=0.8;
