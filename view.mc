@@ -47,7 +47,7 @@ class VirtualPetNothingView extends WatchUi.WatchFace {
  var userBattery = "-";
    if (myStats.battery != null){userBattery = Lang.format("$1$",[((myStats.battery.toNumber())).format("%2d")]);}else{userBattery="-";} 
 
-   var userSTEPS = 9000;
+   var userSTEPS = 9111;
    //if (info.steps != null){userSTEPS = info.steps.toNumber();}else{userSTEPS=0;} 
 
   var userNotify = "-";
@@ -114,11 +114,14 @@ var stepgoal = 0;
        var dog = dogPhase(stepgoal);
        var cat = dogPhase2(today.sec, stepgoal);
        //var object = object(today.day, today.sec);//today.day
-       var smallFont =  WatchUi.loadResource( Rez.Fonts.smallFont );
-       var wordFont =  WatchUi.loadResource( Rez.Fonts.smallFont );
-       var LargeFont =  WatchUi.loadResource( Rez.Fonts.BigFont );
-       var small =  WatchUi.loadResource( Rez.Fonts.smallFont );
+      
+       var medFont =  WatchUi.loadResource( Rez.Fonts.smallFont );
+       var bigfont =  WatchUi.loadResource( Rez.Fonts.BigFont );
        var xsmall =  WatchUi.loadResource( Rez.Fonts.xsmallFont );
+      var wordFont = medFont;
+      var LargeFont = bigfont;
+       if (System.getDeviceSettings().screenHeight >= 360){wordFont = medFont; LargeFont=bigfont;}else{wordFont=xsmall;LargeFont = medFont;}
+
         var rainbow = [0x48FF35,0x9AFF90,0xFF5500,0xFFB2EB,0x9AFFFB,0x48FF35,0xEF1EB8,0x00F7EE,0x00FF00,0xAA00FF,0xFF0000,0xFFAA00,0xF49B7B,0xE7A8FF,0xFFFF35,0xFFB200,0xEE748B,0xFFE900];
       View.onUpdate(dc);
    //use userSTEPS >= 0 for testing, userSTEPS >= 3000
@@ -141,7 +144,7 @@ var stepgoal = 0;
  dc.drawText(centerX*0.66, centerY*0.83,xsmall, (monthArray[today.month]),  Graphics.TEXT_JUSTIFY_CENTER  );
 dc.drawText(centerX*0.67, centerY*0.93,xsmall, (""+today.day.format("%02d")),  Graphics.TEXT_JUSTIFY_CENTER  );
  }else{}
-
+if (System.getDeviceSettings().screenHeight >= 360){
 dc.drawText( centerX*1.7, centerY*0.28, wordFont,  ("!"+1567), Graphics.TEXT_JUSTIFY_RIGHT );
 dc.drawText( centerX*1.82, centerY*0.45, wordFont,  ("^"+66), Graphics.TEXT_JUSTIFY_RIGHT );
 dc.drawText( centerX*1.92, centerY*0.62, wordFont,  ("*"+userBattery), Graphics.TEXT_JUSTIFY_RIGHT );
@@ -149,7 +152,13 @@ dc.drawText( centerX*1.98, centerY*0.79, wordFont,  ("_"+13), Graphics.TEXT_JUST
 dc.drawText( centerX*1.97, centerY*0.95, wordFont,  (">"+userAlarm), Graphics.TEXT_JUSTIFY_RIGHT );
   dc.drawText(centerX*1.85, centerY*1.1, wordFont, " "+TEMP+" "+FC, Graphics.TEXT_JUSTIFY_RIGHT );
   dc.drawText(centerX, centerY*1.77, wordFont, ("$"+userSTEPS), Graphics.TEXT_JUSTIFY_CENTER );
-   
+}else{
+  dc.drawText( centerX*1.7, centerY*0.28, wordFont,  ("~"+1567), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.87, centerY*0.5, wordFont,  ("+"+66), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.98, centerY*0.8, wordFont,  ("="+userBattery), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.97, centerY*1.1, wordFont,  ("^"+userSTEPS), Graphics.TEXT_JUSTIFY_RIGHT );
+ dc.drawText(centerX, centerY*1.77, wordFont, ((monthArray[today.month])+ " " +today.day.format("%02d")), Graphics.TEXT_JUSTIFY_CENTER );
+}
 /*
 calories exclaim
 #charge
