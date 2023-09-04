@@ -47,7 +47,7 @@ class VirtualPetNothingView extends WatchUi.WatchFace {
  var userBattery = "-";
    if (myStats.battery != null){userBattery = Lang.format("$1$",[((myStats.battery.toNumber())).format("%2d")]);}else{userBattery="-";} 
 
-   var userSTEPS = 9111;
+   var userSTEPS = 3000;
    //if (info.steps != null){userSTEPS = info.steps.toNumber();}else{userSTEPS=0;} 
 
   var userNotify = "-";
@@ -105,7 +105,7 @@ else{userHEART = getHeartRate().toString();}
        var centerX = (dc.getWidth()) / 2;
        var centerY = (dc.getHeight()) / 2;
 
-var stepgoal = 0;
+      var stepgoal = 0;
       if (userSTEPS < 3000){stepgoal=0;}
       else if((userSTEPS > 3000) && (userSTEPS < 6000)){stepgoal=1;}
       else if(userSTEPS > 6000){stepgoal=2;}
@@ -124,8 +124,10 @@ var stepgoal = 0;
 
         var rainbow = [0x48FF35,0x9AFF90,0xFF5500,0xFFB2EB,0x9AFFFB,0x48FF35,0xEF1EB8,0x00F7EE,0x00FF00,0xAA00FF,0xFF0000,0xFFAA00,0xF49B7B,0xE7A8FF,0xFFFF35,0xFFB200,0xEE748B,0xFFE900];
       View.onUpdate(dc);
-   //use userSTEPS >= 0 for testing, userSTEPS >= 3000
+   
+
        dog.draw(dc);
+
          dc.setColor(0xFFFFFF, Graphics.COLOR_TRANSPARENT);
        dc.fillEllipse(centerX*1.1, centerY*0.5, centerX*0.23, centerY*0.08);
          dc.setColor(rainbow[today.min%18], Graphics.COLOR_TRANSPARENT);
@@ -136,7 +138,12 @@ var stepgoal = 0;
           dc.fillEllipse(centerX*(1.05 - (today.sec%12)*0.01), centerY*0.5, centerX*0.04, centerY*0.08);
          dc.fillEllipse(centerX*(1.25 - (today.sec%12)*0.01), centerY*0.5, centerX*0.04, centerY*0.08);
          }
+       
+       
        cat.draw(dc);
+       
+       
+       
          dc.setColor(0x000000, Graphics.COLOR_TRANSPARENT);
        dc.drawText(centerX*0.63, centerY*0.38,LargeFont, hours.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
        dc.drawText(centerX*0.66, centerY*0.62,LargeFont, clockTime.min.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
@@ -395,12 +402,9 @@ var size = 0;
         //speed =1;
         growY=0.7;
       }
-      var goaly = 0;
-       var goalx = 0;
-if (stepgoal == 0){goaly=0.4;goalx=0.5;}
-else if (stepgoal == 1){goaly=0.2;goalx=0.5;}
-else if (stepgoal == 2){goaly=0.17;goalx=0.45;}
-else {goaly=0.5;goalx=0.5;}
+      var goaly = 0.17;
+       var goalx = 0.45;
+//if (stepgoal == 0){goaly=0.4;goalx=0.5;} else {goaly=0.17;goalx=0.45;}
 
   var venus2X =  System.getDeviceSettings().screenWidth *goalx*growX;
  //if (seconds>=35){venus2X=mySettings.screenHeight *0.17*growX;}else {if(seconds>=25){venus2X=(mySettings.screenWidth*2.5)-((seconds%35)*25*speed);}else{venus2X=(mySettings.screenWidth)-((seconds%35)*25*speed);}}
