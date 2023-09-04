@@ -40,9 +40,9 @@ class VirtualPetNothingView extends WatchUi.WatchFace {
                 timeFormat = "$1$:$2$";
                 hours = hours.format("%02d");  
         }
-        var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
-        var weekdayArray = ["Day", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as Array<String>;
-        var monthArray = ["Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] as Array<String>;
+        //var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
+        //var weekdayArray = ["Day", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as Array<String>;
+       // var monthArray = ["Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] as Array<String>;
         var monthArraySQ = ["Month", "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"] as Array<String>;
  var userBattery = "-";
    if (myStats.battery != null){userBattery = Lang.format("$1$",[((myStats.battery.toNumber())).format("%2d")]);}else{userBattery="-";} 
@@ -93,38 +93,7 @@ var positions;
     
   
 
-  var sunrise = Time.Gregorian.info(Toybox.Weather.getSunrise(positions, timeStamp), Time.FORMAT_MEDIUM);
-        
-	var sunriseHour;
-  if (Toybox.Weather.getSunrise(positions, timeStamp) == null){sunriseHour = 6;}
-    else {sunriseHour= sunrise.hour;}
-         if (!System.getDeviceSettings().is24Hour) {
-            if (sunriseHour > 12) {
-                sunriseHour = (sunriseHour - 12).abs();
-            }
-        } else {
-           
-                timeFormat = "$1$:$2$";
-                sunriseHour = sunriseHour.format("%02d");
-        }
-        
-    var sunset;
-    var sunsetHour;
-    sunset = Time.Gregorian.info(Toybox.Weather.getSunset(positions, timeStamp), Time.FORMAT_MEDIUM);
-    if (Toybox.Weather.getSunset(positions, timeStamp) == null){sunsetHour = 6;}
-    else {sunsetHour= sunset.hour ;}
-        
-	
-         if (!System.getDeviceSettings().is24Hour) {
-            if (sunsetHour > 12) {
-                sunsetHour = (sunsetHour - 12).abs();
-            }
-        } else {
-            
-                timeFormat = "$1$:$2$";
-                sunsetHour = sunsetHour.format("%02d");
-        }
-
+ 
 
    //Get and show Heart Rate Amount
 
@@ -145,12 +114,11 @@ var stepgoal = 0;
        var dog = dogPhase(stepgoal);
        var cat = dogPhase2(today.sec, stepgoal);
        //var object = object(today.day, today.sec);//today.day
-       var smallFont =  WatchUi.loadResource( Rez.Fonts.WeatherFont );
+       var smallFont =  WatchUi.loadResource( Rez.Fonts.smallFont );
        var wordFont =  WatchUi.loadResource( Rez.Fonts.smallFont );
-       var LargeFont =  WatchUi.loadResource( Rez.Fonts.WeatherFont );
+       var LargeFont =  WatchUi.loadResource( Rez.Fonts.BigFont );
        var small =  WatchUi.loadResource( Rez.Fonts.smallFont );
        var xsmall =  WatchUi.loadResource( Rez.Fonts.xsmallFont );
-       var flash = centerY*1.8;
         var rainbow = [0x48FF35,0x9AFF90,0xFF5500,0xFFB2EB,0x9AFFFB,0x48FF35,0xEF1EB8,0x00F7EE,0x00FF00,0xAA00FF,0xFF0000,0xFFAA00,0xF49B7B,0xE7A8FF,0xFFFF35,0xFFB200,0xEE748B,0xFFE900];
       View.onUpdate(dc);
    //use userSTEPS >= 0 for testing, userSTEPS >= 3000
@@ -169,85 +137,25 @@ var stepgoal = 0;
          dc.setColor(0x000000, Graphics.COLOR_TRANSPARENT);
        dc.drawText(centerX*0.6, centerY*0.35,LargeFont, hours.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
        dc.drawText(centerX*0.63, centerY*0.63,LargeFont, clockTime.min.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
-   /* 
-  if (System.getDeviceSettings().screenHeight < 301){
-    wordFont =  WatchUi.loadResource( Rez.Fonts.xsmallFont );
-    dc.setColor(0x0BCBFF, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(centerX,centerY*1.45,xsmall,(weekdayArray[today.day_of_week]+" , "+ monthArray[today.month]+" "+ today.day +" " +today.year), Graphics.TEXT_JUSTIFY_CENTER );
-        dc.setColor(0xFFFFFF, Graphics.COLOR_TRANSPARENT);
-       dc.drawText(centerX,  centerY*0.87,LargeFont, timeString,  Graphics.TEXT_JUSTIFY_CENTER  );
-
-       dc.setColor(0x2AFA3F, Graphics.COLOR_TRANSPARENT);
-if (today.sec%20==0 || today.sec%20==1 || today.sec%20==2 ){ 
-  dc.setColor(0x2AFA3F, Graphics.COLOR_TRANSPARENT);
-dc.drawText( centerX,  centerY*1.7, small,  (" ! "), Graphics.TEXT_JUSTIFY_RIGHT );
-dc.drawText( centerX, centerY*1.7, wordFont,  (""+userBattery), Graphics.TEXT_JUSTIFY_LEFT );}
-else if (today.sec%20==3 || today.sec%20==4 || today.sec%20==5 ){
-  dc.setColor(0x2AFA3F, Graphics.COLOR_TRANSPARENT);
-dc.drawText( centerX,  centerY*1.7, small,  (" ^ "), Graphics.TEXT_JUSTIFY_RIGHT );
-dc.drawText( centerX, centerY*1.7, wordFont,  (""+userCAL), Graphics.TEXT_JUSTIFY_LEFT );}
-else if (today.sec%20==6 ||today.sec%20==7 || today.sec%20==8  ){  
-  dc.setColor(0x2AFA3F, Graphics.COLOR_TRANSPARENT);
-dc.drawText(centerX, centerY*1.7, small, " % ",Graphics.TEXT_JUSTIFY_RIGHT);      
-dc.drawText(centerX, centerY*1.7, wordFont, userHEART, Graphics.TEXT_JUSTIFY_LEFT ); }
-else if (today.sec%20==9 ||today.sec%20==10 || today.sec%20==11 || today.sec%20==12 || today.sec%20==13  ){  
-dc.setColor(0x0BCBFF, Graphics.COLOR_TRANSPARENT);   
-dc.drawText(centerX, centerY*1.7, small, " a ",Graphics.TEXT_JUSTIFY_LEFT); 
-dc.drawText(centerX, centerY*1.65, xsmall, "          "+userAlarm+"          ", Graphics.TEXT_JUSTIFY_LEFT );     
-dc.setColor(0xFFFF35, Graphics.COLOR_TRANSPARENT);  
-dc.drawText(centerX, centerY*1.7, small, " a ",Graphics.TEXT_JUSTIFY_RIGHT); 
-dc.drawText(centerX, centerY*1.65, xsmall, "          "+userNotify+"          ", Graphics.TEXT_JUSTIFY_RIGHT );  }
-else{
-  dc.setColor(0x2AFA3F, Graphics.COLOR_TRANSPARENT);
-dc.drawText(centerX, centerY*1.7, small, (" a "), Graphics.TEXT_JUSTIFY_RIGHT );
-  dc.drawText(centerX, centerY*1.7, wordFont, (""+userSTEPS), Graphics.TEXT_JUSTIFY_LEFT );}
-
-  }else{
-      
-       dc.setColor(0xFFFFFF, Graphics.COLOR_TRANSPARENT);
-       dc.drawText(centerX,  centerY*1.35,LargeFont, timeString,  Graphics.TEXT_JUSTIFY_CENTER  );
-       dc.setColor(0x0BCBFF, Graphics.COLOR_TRANSPARENT);
-       dc.drawText(centerX,centerY*1.2,wordFont,(weekdayArray[today.day_of_week]+" , "+ monthArray[today.month]+" "+ today.day +" " +today.year), Graphics.TEXT_JUSTIFY_CENTER );
-
-if (today.sec%20==0 ||today.sec%20==1){
-dc.setColor(0xFFFF35, Graphics.COLOR_TRANSPARENT);
-dc.drawText(centerX*0.9, centerY*1.75, smallFont, "b",Graphics.TEXT_JUSTIFY_RIGHT);
-dc.drawText(centerX*0.9, flash, wordFont, (sunriseHour + ":" + sunrise.min.format("%02u")+"AM"), Graphics.TEXT_JUSTIFY_LEFT );     
-
-}else if (today.sec%20==2 ||today.sec%20==3){
-dc.setColor(0xFFFF35, Graphics.COLOR_TRANSPARENT);
-dc.drawText(centerX*0.9, centerY*1.75, smallFont, "b",Graphics.TEXT_JUSTIFY_RIGHT);
-dc.drawText(centerX*0.9, flash, wordFont, (sunsetHour + ":" + sunset.min.format("%02u")+"PM"), Graphics.TEXT_JUSTIFY_LEFT); 
-}
-else if (today.sec%20==4 || today.sec%20==5|| today.sec%20==6){  
-  dc.setColor(0xFFFF35, Graphics.COLOR_TRANSPARENT);
-dc.drawText(centerX*0.95, centerY*1.75, smallFont, weather(cond),Graphics.TEXT_JUSTIFY_RIGHT);      
-dc.drawText(centerX, flash, wordFont, " "+TEMP+" "+FC, Graphics.TEXT_JUSTIFY_LEFT );}  
-else if (today.sec%20==7 ||today.sec%20==8 || today.sec%20==9){ 
-dc.setColor(0x0BCBFF, Graphics.COLOR_TRANSPARENT);   
-dc.drawText(centerX, flash, small, " a ",Graphics.TEXT_JUSTIFY_LEFT); 
-dc.drawText(centerX, centerY*1.75, xsmall, "          "+userAlarm+"          ", Graphics.TEXT_JUSTIFY_LEFT );     
-dc.setColor(0xFFFF35, Graphics.COLOR_TRANSPARENT);  
-dc.drawText(centerX, flash, small, " a ",Graphics.TEXT_JUSTIFY_RIGHT); 
-dc.drawText(centerX, centerY*1.75, xsmall, "          "+userNotify+"          ", Graphics.TEXT_JUSTIFY_RIGHT );}  
-else{
-  
-  if (today.sec%8 == 0||today.sec%8 == 1){
-  dc.setColor(0xFFFF35, Graphics.COLOR_TRANSPARENT);
-dc.drawText( centerX, flash, wordFont,  (" ^ "+userCAL), Graphics.TEXT_JUSTIFY_CENTER );
-  }else if (today.sec%8 == 2 ||today.sec%8 == 3){
-  dc.setColor(0x2AFA3F, Graphics.COLOR_TRANSPARENT);
-dc.drawText( centerX, flash, wordFont,  (" ! "+userBattery), Graphics.TEXT_JUSTIFY_CENTER );}
-else if (today.sec%8 == 4 || today.sec%8 == 5){ 
-dc.setColor(0xEF1EB8, Graphics.COLOR_TRANSPARENT);     
-dc.drawText(centerX, flash, wordFont, " % "+userHEART, Graphics.TEXT_JUSTIFY_CENTER ); 
-}else{
-  dc.setColor(0x2AFA3F, Graphics.COLOR_TRANSPARENT);
-  dc.drawText(centerX, flash, wordFont, (" a "+userSTEPS), Graphics.TEXT_JUSTIFY_CENTER );}
-}}
-
+dc.drawText( centerX*1.5, centerY*0.4, wordFont,  ("!"+userCAL), Graphics.TEXT_JUSTIFY_LEFT );
+dc.drawText( centerX*1.72, centerY*0.55, wordFont,  ("^"+userHEART), Graphics.TEXT_JUSTIFY_LEFT );
+dc.drawText( centerX*1.8, centerY*0.7, wordFont,  ("*"+userBattery), Graphics.TEXT_JUSTIFY_LEFT );
+dc.drawText( centerX*1.82, centerY*0.86, wordFont,  ("_"+userNotify), Graphics.TEXT_JUSTIFY_LEFT );
+dc.drawText( centerX*1.8, centerY*1, wordFont,  (">"+userAlarm), Graphics.TEXT_JUSTIFY_LEFT );
+  dc.drawText(centerX*1.8, centerY*1.17, wordFont, " "+TEMP+" "+FC, Graphics.TEXT_JUSTIFY_RIGHT );
+  dc.drawText(centerX, centerY*1.8, wordFont, ("$"+userSTEPS), Graphics.TEXT_JUSTIFY_CENTER );
+   
+/*
+calories exclaim
+#charge
+$foot
+>alarm
+*battery
+^heart
+_new message
++phone
+= large alarmring
 */
-
 
 }
 
@@ -439,9 +347,9 @@ var size = 0;
 //var speed =1;     
       if (mySettingsHeight == 218){
         size =1;
-        growX=1.2;
+        growX=0.79;
         //speed = 0.6;
-        growY=1.1;
+        growY=0.7;
       } else if (mySettingsHeight == 260){
         size =1;
         growX=1.4;
@@ -464,9 +372,9 @@ var size = 0;
         growY=0.6;
       }else if ( System.getDeviceSettings().screenShape != 1){
         size=0;
-        growX=0.5;
+        growX=0.85;
         //speed = 0.9;
-        growY=0.5;
+        growY=0.7;
       }else{
         size=0;
         growX=0.8;
