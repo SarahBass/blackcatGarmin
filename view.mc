@@ -41,8 +41,8 @@ class VirtualPetNothingView extends WatchUi.WatchFace {
                 hours = hours.format("%02d");  
         }
         //var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
-        //var weekdayArray = ["Day", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as Array<String>;
-       // var monthArray = ["Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] as Array<String>;
+        var weekdayArray = ["Day", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as Array<String>;
+        var monthArray = ["Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] as Array<String>;
         var monthArraySQ = ["Month", "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"] as Array<String>;
  var userBattery = "-";
    if (myStats.battery != null){userBattery = Lang.format("$1$",[((myStats.battery.toNumber())).format("%2d")]);}else{userBattery="-";} 
@@ -135,15 +135,21 @@ var stepgoal = 0;
          }
        cat.draw(dc);
          dc.setColor(0x000000, Graphics.COLOR_TRANSPARENT);
-       dc.drawText(centerX*0.6, centerY*0.40,LargeFont, hours.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
-       dc.drawText(centerX*0.65, centerY*0.68,LargeFont, clockTime.min.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
-dc.drawText( centerX*1.5, centerY*0.3, wordFont,  ("!"+userCAL), Graphics.TEXT_JUSTIFY_RIGHT );
-dc.drawText( centerX*1.82, centerY*0.45, wordFont,  ("^"+userHEART), Graphics.TEXT_JUSTIFY_RIGHT );
-dc.drawText( centerX*1.92, centerY*0.6, wordFont,  ("*"+userBattery), Graphics.TEXT_JUSTIFY_RIGHT );
-dc.drawText( centerX*2, centerY*0.79, wordFont,  ("_"+userNotify), Graphics.TEXT_JUSTIFY_RIGHT );
+       dc.drawText(centerX*0.63, centerY*0.38,LargeFont, hours.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
+       dc.drawText(centerX*0.66, centerY*0.62,LargeFont, clockTime.min.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
+ if (System.getDeviceSettings().screenHeight >= 390){
+ dc.drawText(centerX*0.66, centerY*0.9,xsmall, (weekdayArray[today.day_of_week]),  Graphics.TEXT_JUSTIFY_CENTER  );
+dc.drawText(centerX*0.66, centerY,xsmall, (monthArray[today.month]+" "+ today.day),  Graphics.TEXT_JUSTIFY_CENTER  );
+dc.drawText(centerX*0.66, centerY*1.1,xsmall, (""+today.year), Graphics.TEXT_JUSTIFY_CENTER  );
+ }else{}
+
+dc.drawText( centerX*1.25, centerY*0.28, wordFont,  ("!"+1567), Graphics.TEXT_JUSTIFY_LEFT );
+dc.drawText( centerX*1.82, centerY*0.45, wordFont,  ("^"+66), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.92, centerY*0.62, wordFont,  ("*"+userBattery), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.98, centerY*0.79, wordFont,  ("_"+13), Graphics.TEXT_JUSTIFY_RIGHT );
 dc.drawText( centerX*1.97, centerY*0.95, wordFont,  (">"+userAlarm), Graphics.TEXT_JUSTIFY_RIGHT );
   dc.drawText(centerX*1.85, centerY*1.1, wordFont, " "+TEMP+" "+FC, Graphics.TEXT_JUSTIFY_RIGHT );
-  dc.drawText(centerX*0.93, centerY*1.8, wordFont, ("$"+userSTEPS), Graphics.TEXT_JUSTIFY_CENTER );
+  dc.drawText(centerX, centerY*1.77, wordFont, ("$"+userSTEPS), Graphics.TEXT_JUSTIFY_CENTER );
    
 /*
 calories exclaim
