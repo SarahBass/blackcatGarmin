@@ -137,13 +137,12 @@ var stepgoal = 0;
          dc.setColor(0x000000, Graphics.COLOR_TRANSPARENT);
        dc.drawText(centerX*0.63, centerY*0.38,LargeFont, hours.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
        dc.drawText(centerX*0.66, centerY*0.62,LargeFont, clockTime.min.format("%02d"),  Graphics.TEXT_JUSTIFY_CENTER  );
- if (System.getDeviceSettings().screenHeight >= 390){
- dc.drawText(centerX*0.66, centerY*0.9,xsmall, (weekdayArray[today.day_of_week]),  Graphics.TEXT_JUSTIFY_CENTER  );
-dc.drawText(centerX*0.66, centerY,xsmall, (monthArray[today.month]+" "+ today.day),  Graphics.TEXT_JUSTIFY_CENTER  );
-dc.drawText(centerX*0.66, centerY*1.1,xsmall, (""+today.year), Graphics.TEXT_JUSTIFY_CENTER  );
+ if (System.getDeviceSettings().screenHeight >= 360){
+ dc.drawText(centerX*0.66, centerY*0.83,xsmall, (monthArray[today.month]),  Graphics.TEXT_JUSTIFY_CENTER  );
+dc.drawText(centerX*0.67, centerY*0.93,xsmall, (""+today.day.format("%02d")),  Graphics.TEXT_JUSTIFY_CENTER  );
  }else{}
 
-dc.drawText( centerX*1.25, centerY*0.28, wordFont,  ("!"+1567), Graphics.TEXT_JUSTIFY_LEFT );
+dc.drawText( centerX*1.7, centerY*0.28, wordFont,  ("!"+1567), Graphics.TEXT_JUSTIFY_RIGHT );
 dc.drawText( centerX*1.82, centerY*0.45, wordFont,  ("^"+66), Graphics.TEXT_JUSTIFY_RIGHT );
 dc.drawText( centerX*1.92, centerY*0.62, wordFont,  ("*"+userBattery), Graphics.TEXT_JUSTIFY_RIGHT );
 dc.drawText( centerX*1.98, centerY*0.79, wordFont,  ("_"+13), Graphics.TEXT_JUSTIFY_RIGHT );
