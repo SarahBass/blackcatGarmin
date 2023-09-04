@@ -366,9 +366,9 @@ var size = 0;
         growY=0.7;
       } else if (mySettingsHeight == 260){
         size =1;
-        growX=1.4;
+        growX=0.87;
         //speed = 0.6;
-        growY=1.5;
+        growY=0.81;
       }else if (mySettingsHeight > 360 && System.getDeviceSettings().screenHeight < 415){
         size=2;
         growX=0.7;
