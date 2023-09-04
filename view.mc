@@ -43,11 +43,11 @@ class VirtualPetNothingView extends WatchUi.WatchFace {
         //var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
         var weekdayArray = ["Day", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as Array<String>;
         var monthArray = ["Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] as Array<String>;
-        var monthArraySQ = ["Month", "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"] as Array<String>;
+        //var monthArraySQ = ["Month", "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"] as Array<String>;
  var userBattery = "-";
    if (myStats.battery != null){userBattery = Lang.format("$1$",[((myStats.battery.toNumber())).format("%2d")]);}else{userBattery="-";} 
 
-   var userSTEPS = 3000;
+   var userSTEPS = 3400;
    //if (info.steps != null){userSTEPS = info.steps.toNumber();}else{userSTEPS=0;} 
 
   var userNotify = "-";
@@ -59,41 +59,6 @@ var userAlarm = "-";
      var userCAL = 0;
    if (info.calories != null){userCAL = info.calories.toNumber();}else{userCAL=0;}  
    
-
-    var timeStamp= new Time.Moment(Time.today().value());
-   var getCC = Toybox.Weather.getCurrentConditions();
-    var TEMP = "--";
-    var FC = "-";
-     if(getCC != null && getCC.temperature!=null){     
-        if (System.getDeviceSettings().temperatureUnits == 0){  
-    FC = "C";
-    TEMP = getCC.temperature.format("%d");
-    }else{
-    TEMP = (((getCC.temperature*9)/5)+32).format("%d"); 
-    FC = "F";   
-    }}
-     else {TEMP = "--";}
-    
-    var cond;
-    if (getCC != null){ cond = getCC.condition.toNumber();}
-    else{cond = 0;}//sun
-    
-var positions;
-        if (Toybox.Weather.getCurrentConditions().observationLocationPosition == null){
-        positions=new Position.Location( 
-    {
-        :latitude => 33.684566,
-        :longitude => -117.826508,
-        :format => :degrees
-    }
-    );
-    }else{
-      positions= Toybox.Weather.getCurrentConditions().observationLocationPosition;
-    }
-    
-  
-
- 
 
    //Get and show Heart Rate Amount
 
@@ -153,11 +118,10 @@ dc.drawText(centerX*0.67, centerY*0.93,xsmall, (""+today.day.format("%02d")),  G
  }else{}
 if (System.getDeviceSettings().screenHeight >= 360){
 dc.drawText( centerX*1.7, centerY*0.28, wordFont,  ("!"+1567), Graphics.TEXT_JUSTIFY_RIGHT );
-dc.drawText( centerX*1.82, centerY*0.45, wordFont,  ("^"+66), Graphics.TEXT_JUSTIFY_RIGHT );
-dc.drawText( centerX*1.92, centerY*0.62, wordFont,  ("*"+userBattery), Graphics.TEXT_JUSTIFY_RIGHT );
-dc.drawText( centerX*1.98, centerY*0.79, wordFont,  ("_"+13), Graphics.TEXT_JUSTIFY_RIGHT );
-dc.drawText( centerX*1.97, centerY*0.95, wordFont,  (">"+userAlarm), Graphics.TEXT_JUSTIFY_RIGHT );
-  dc.drawText(centerX*1.85, centerY*1.1, wordFont, " "+TEMP+" "+FC, Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.87, centerY*0.5, wordFont,  ("^"+66), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.97, centerY*0.7, wordFont,  ("*"+userBattery), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.98, centerY*0.9, wordFont,  ("_"+13), Graphics.TEXT_JUSTIFY_RIGHT );
+dc.drawText( centerX*1.9, centerY*1.1, wordFont,  (">"+userAlarm), Graphics.TEXT_JUSTIFY_RIGHT );
   dc.drawText(centerX, centerY*1.77, wordFont, ("$"+userSTEPS), Graphics.TEXT_JUSTIFY_CENTER );
 }else{
   dc.drawText( centerX*1.7, centerY*0.28, wordFont,  ("~"+1567), Graphics.TEXT_JUSTIFY_RIGHT );
@@ -190,15 +154,7 @@ _new message
     
     function onEnterSleep() as Void {}
 
-function weather(cond) {
-  if (cond == 0 || cond == 40){return "b";}//sun
-  else if (cond == 50 || cond == 49 ||cond == 47||cond == 45||cond == 44||cond == 42||cond == 31||cond == 27||cond == 26||cond == 25||cond == 24||cond == 21||cond == 18||cond == 15||cond == 14||cond == 13||cond == 11||cond == 3){return "a";}//rain
-  else if (cond == 52||cond == 20||cond == 2||cond == 1){return "e";}//cloud
-  else if (cond == 5 || cond == 8|| cond == 9|| cond == 29|| cond == 30|| cond == 33|| cond == 35|| cond == 37|| cond == 38|| cond == 39){return "g";}//wind
-  else if (cond == 51 || cond == 48|| cond == 46|| cond == 43|| cond == 10|| cond == 4){return "i";}//snow
-  else if (cond == 32 || cond == 37|| cond == 41|| cond == 42){return "f";}//whirlwind 
-  else {return "c";}//suncloudrain 
-}
+
 
 
 private function getHeartRate() {
@@ -404,7 +360,7 @@ var size = 0;
       }
       var goaly = 0.17;
        var goalx = 0.45;
-//if (stepgoal == 0){goaly=0.4;goalx=0.5;} else {goaly=0.17;goalx=0.45;}
+
 
   var venus2X =  System.getDeviceSettings().screenWidth *goalx*growX;
  //if (seconds>=35){venus2X=mySettings.screenHeight *0.17*growX;}else {if(seconds>=25){venus2X=(mySettings.screenWidth*2.5)-((seconds%35)*25*speed);}else{venus2X=(mySettings.screenWidth)-((seconds%35)*25*speed);}}
